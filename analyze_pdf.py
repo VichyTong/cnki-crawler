@@ -16,12 +16,9 @@ class Analyze_pdf :
                         SubjectCnt += 1
                         SubsubjectCnt = 0
                     elif re.match("\d", i[0]) != None:
-                        List[SubjectCnt][SubsubjectCnt].append(i[1])
+                        List[SubjectCnt][SubsubjectCnt].append(i[1].replace('\n', ''))
                     elif re.match("[A-Z]+", i[1]) != None:
-                        List[SubjectCnt].append([i[0]])
+                        List[SubjectCnt].append([i[0].replace('\n', '')])
                         SubsubjectCnt += 1
-        return list
-
-mypath = "C:\\Users\\12088\\VS Code Lib\\cnki-crawler\\北大图书馆中文核心期刊要目总览（2020版）.pdf"
-a = Analyze_pdf()
-a.work(mypath)
+                break
+        return List
