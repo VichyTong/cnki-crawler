@@ -19,8 +19,7 @@ class Go_detail():
     self.driver.quit()
   
   
-  def wait_for_window(self, timeout = 2):
-    time.sleep(round(timeout / 1000))
+  def wait_for_window(self):
     wh_now = self.driver.window_handles
     wh_then = self.vars["window_handles"]
     if len(wh_now) > len(wh_then):
@@ -33,7 +32,7 @@ class Go_detail():
     )
     self.vars["window_handles"] = self.driver.window_handles
     self.driver.find_element(By.CSS_SELECTOR, "h1").click()
-    self.vars["win8248"] = self.wait_for_window(2000)
+    self.vars["win8248"] = self.wait_for_window()
     self.driver.switch_to.window(self.vars["win8248"])
     pagesource = self.driver.page_source
     html = etree.HTML(pagesource)
@@ -87,7 +86,7 @@ class Go_detail():
       journal["ZIF"] = ""
     return journal
 
-with open("name.json","r") as f:
+with open("./name.json","r", encoding="utf-8") as f:
   List = json.load(f)
 
 domain = "https://navi.cnki.net"
@@ -112,5 +111,5 @@ for subject in List:
     
 
 json_list = json.dumps(List, indent=1, ensure_ascii=False)
-fo = open('sample_output.json', 'w')
+fo = open('sample_output.json', 'w', encoding="utf-8")
 fo.write(json_list)
