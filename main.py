@@ -27,7 +27,7 @@ class Go_detail():
   
   def work(self, name):
     self.driver.get("https://navi.cnki.net/knavi/journals/search?&q=" + quote(name))
-    WebDriverWait(self.driver, 10).until(
+    WebDriverWait(self.driver, 100).until(
       EC.presence_of_all_elements_located((By.CSS_SELECTOR, "h1"))
     )
     self.vars["window_handles"] = self.driver.window_handles
@@ -107,6 +107,9 @@ for subject in List:
           journal_name = journal_name + ')'
         subsubject[j] = Detail.work(journal_name)
         Detail.teardown_method()
+        json_list = json.dumps(List, indent=1, ensure_ascii=False)
+        fo = open('sample_output.json', 'w', encoding="utf-8")
+        fo.write(json_list)
 
     
 
