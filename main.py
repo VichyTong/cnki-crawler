@@ -84,6 +84,11 @@ class Go_detail():
       journal["ZIF"] = tmp[0]
     else:
       journal["ZIF"] = ""
+    tmp = html.xpath('//img[@class="pic-book"]/@src')
+    if(len(tmp) > 0):
+      journal["img"] = tmp[0]
+    else:
+      journal["img"] = ""
     return journal
 
 with open("./name.json","r", encoding="utf-8") as f:
@@ -110,6 +115,9 @@ for subject in List:
         json_list = json.dumps(List, indent=1, ensure_ascii=False)
         fo = open('sample_output.json', 'w', encoding="utf-8")
         fo.write(json_list)
+        break
+    break
+  break
 
     
 
