@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from urllib.parse import quote
 import json
 import re
@@ -12,8 +13,12 @@ import re
 
 class Go_detail():
   def setup_method(self):
-    self.driver = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    self.driver = webdriver.Chrome(chrome_options=chrome_options)
     self.vars = {}
+    self.driver.implicitly_wait(10)
   
   def teardown_method(self):
     self.driver.quit()
@@ -115,9 +120,6 @@ for subject in List:
         json_list = json.dumps(List, indent=1, ensure_ascii=False)
         fo = open('sample_output.json', 'w', encoding="utf-8")
         fo.write(json_list)
-        break
-    break
-  break
 
     
 
